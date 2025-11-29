@@ -36,7 +36,7 @@ struct Comentario {
     string texto;
 };
 
-// Funciones de conversión
+
 int convertirEntero(const string &texto) {
     int valor = 0;
     stringstream ss(texto);
@@ -51,12 +51,12 @@ double convertirDouble(const string &texto) {
     return valor;
 }
 
-// Función de comparación para ordenar productos por stock
+
 bool compararPorStock(const Producto &a, const Producto &b) {
     return a.stock < b.stock;
 }
 
-// Cargar datos desde archivos
+
 vector<Usuario> cargarUsuarios(const string &nombreArchivo) {
     vector<Usuario> usuarios;
     ifstream archivo(nombreArchivo.c_str());
@@ -110,7 +110,7 @@ vector<Comentario> cargarComentarios(const string &nombreArchivo) {
     }
     
     string linea;
-    getline(archivo, linea); // Saltar encabezado
+    getline(archivo, linea); 
 
     while (getline(archivo, linea)) {
         stringstream ss(linea);
@@ -129,7 +129,7 @@ vector<Comentario> cargarComentarios(const string &nombreArchivo) {
     return comentarios;
 }
 
-// Inicio de sesión
+
 Usuario *iniciarSesion(vector<Usuario> &usuarios, const string &correo, const string &contrasena) {
     for (size_t i = 0; i < usuarios.size(); ++i)
         if (usuarios[i].correo == correo && usuarios[i].contrasena == contrasena)
@@ -137,7 +137,7 @@ Usuario *iniciarSesion(vector<Usuario> &usuarios, const string &correo, const st
     return NULL;
 }
 
-// Listar productos con stock bajo
+
 vector<Producto> listarProductosBajoStock(const vector<Producto> &productos) {
     vector<Producto> bajos;
     for (size_t i = 0; i < productos.size(); ++i)
@@ -146,13 +146,13 @@ vector<Producto> listarProductosBajoStock(const vector<Producto> &productos) {
     return bajos;
 }
 
-// ========== NUEVAS FUNCIONES DE REPORTES ==========
 
-// a. Mostrar los 5 productos con menor stock (ascendente)
+
+
 void reporteTop5MenorStock(vector<Producto> productos) {
     cout << "\n=== REPORTE: 5 PRODUCTOS CON MENOR STOCK ===\n";
     
-    // Ordenar productos por stock de forma ascendente
+    
     sort(productos.begin(), productos.end(), compararPorStock);
     
     cout << "ID Producto | Nombre | Stock\n";
@@ -166,7 +166,7 @@ void reporteTop5MenorStock(vector<Producto> productos) {
     }
 }
 
-// b. Mostrar cantidad de comentarios por fecha
+
 void reporteComentariosPorFecha(const vector<Comentario> &comentarios) {
     cout << "\n=== REPORTE: COMENTARIOS POR FECHA ===\n";
     cout << "Ingrese la fecha (formato YYYY-MM-DD): ";
@@ -185,9 +185,9 @@ void reporteComentariosPorFecha(const vector<Comentario> &comentarios) {
     cout << "Cantidad de comentarios: " << cantidad << "\n";
 }
 
-// c. Mostrar precio máximo y mínimo de productos
+
 void reportePreciosMaxMin(const vector<Producto> &productos) {
-    cout << "\n=== REPORTE: PRECIOS MÁXIMO Y MÍNIMO ===\n";
+    cout << "\n=== REPORTE: PRECIOS MÃXIMO Y MÃNIMO ===\n";
     
     if (productos.empty()) {
         cout << "No hay productos en el inventario.\n";
@@ -210,20 +210,20 @@ void reportePreciosMaxMin(const vector<Producto> &productos) {
         }
     }
     
-    cout << "Precio MÁXIMO: $" << precioMax << " (" << nombreMax << ")\n";
-    cout << "Precio MÍNIMO: $" << precioMin << " (" << nombreMin << ")\n";
+    cout << "Precio MÃXIMO: $" << precioMax << " (" << nombreMax << ")\n";
+    cout << "Precio MÃNIMO: $" << precioMin << " (" << nombreMin << ")\n";
 }
 
-// Menú de reportes
+
 void menuReportes(const vector<Producto> &productos, const vector<Comentario> &comentarios) {
     int opcion;
     do {
-        cout << "\n=== MENÚ DE REPORTES ===\n";
+        cout << "\n=== MENÃš DE REPORTES ===\n";
         cout << "1. Top 5 productos con menor stock\n";
         cout << "2. Cantidad de comentarios por fecha\n";
-        cout << "3. Precio máximo y mínimo\n";
-        cout << "0. Volver al menú principal\n";
-        cout << "Seleccione una opción: ";
+        cout << "3. Precio mÃ¡ximo y mÃ­nimo\n";
+        cout << "0. Volver al menÃº principal\n";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> opcion;
         cin.ignore();
         
@@ -238,15 +238,15 @@ void menuReportes(const vector<Producto> &productos, const vector<Comentario> &c
                 reportePreciosMaxMin(productos);
                 break;
             case 0:
-                cout << "Volviendo al menú principal...\n";
+                cout << "Volviendo al menÃº principal...\n";
                 break;
             default:
-                cout << "Opción no válida.\n";
+                cout << "OpciÃ³n no vÃ¡lida.\n";
         }
     } while (opcion != 0);
 }
 
-// ========== FUNCIONES DE CARRITO ==========
+
 
 void guardarCarritoArchivo(const Usuario &usuario, const vector<ItemCarrito> &carrito) {
     ofstream archivo("Carrito.txt", ios::app); 
@@ -303,7 +303,7 @@ void mostrarCarrito(const vector<ItemCarrito> &carrito) {
     cout << "TOTAL: $" << total << "\n";
 }
 
-// ========== MAIN ==========
+
 
 int main() {
     vector<Usuario> usuarios = cargarUsuarios("Usuarios.txt");
@@ -312,20 +312,20 @@ int main() {
     vector<ItemCarrito> carrito;
 
     string correo, contrasena;
-    cout << "Correo electrónico: ";
+    cout << "Correo electrÃ³nico: ";
     getline(cin, correo);
-    cout << "Contraseña: ";
+    cout << "ContraseÃ±a: ";
     getline(cin, contrasena);
 
     Usuario *usuarioActual = iniciarSesion(usuarios, correo, contrasena);
     if (!usuarioActual) {
-        cout << "Usuario o contraseña inválidos.\n";
+        cout << "Usuario o contraseÃ±a invÃ¡lidos.\n";
         return 0;
     }
 
     int opcion;
     do {
-        cout << "\n=== MENÚ PRINCIPAL ===\n";
+        cout << "\n=== MENÃš PRINCIPAL ===\n";
         cout << "1. Listar productos con stock menor a 15\n";
         cout << "2. Listar todos los usuarios\n";
         cout << "3. Agregar producto al carrito\n";
@@ -334,7 +334,7 @@ int main() {
         cout << "6. Ver carrito guardado (archivo)\n";
         cout << "7. REPORTES\n";
         cout << "0. Salir\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opciÃ³n: ";
         cin >> opcion;
         cin.ignore();
 
@@ -354,7 +354,7 @@ int main() {
             for (size_t i = 0; i < usuarios.size(); ++i)
                 cout << usuarios[i].id << " | " << usuarios[i].nombre
                      << " | " << usuarios[i].correo
-                     << " | Dirección: " << usuarios[i].direccion
+                     << " | DirecciÃ³n: " << usuarios[i].direccion
                      << " | Pago: " << usuarios[i].metodoPago << "\n";
             break;
         }
@@ -399,9 +399,10 @@ int main() {
             cout << "Saliendo del sistema...\n";
             break;
         default:
-            cout << "Opción no válida.\n";
+            cout << "OpciÃ³n no vÃ¡lida.\n";
         }
     } while (opcion != 0);
 
     return 0;
 }
+
